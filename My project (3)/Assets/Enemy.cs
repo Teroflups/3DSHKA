@@ -18,6 +18,13 @@ public class Enemy : MonoBehaviour
         UpdateUI();
     }
 
+    public void Initialize(string name, int healthValue, int levelValue)
+    {
+        health = healthValue;
+        lvl = levelValue;
+        enemyName = name;
+    }
+
     public void SetName(string newName)
     {
         enemyName = newName;
@@ -40,13 +47,13 @@ public class Enemy : MonoBehaviour
     private void UpdateUI()
     {
         enemyNameText.text = enemyName;
-        healthText.text = "health" + health;
-        lvlText.text = "lvl" + lvl;
+        healthText.text = "health " + health;
+        lvlText.text = "lvl " + lvl;
     }
 
     public void ToBossKFC()
     {
-        enemyName = "BossKFC";
+        enemyName = "BossKFC ";
         health *= 3;
         lvl += 1;
         UpdateUI();

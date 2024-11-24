@@ -6,25 +6,28 @@ using UnityEngine.UI;
 
 public class EnemyChanger : MonoBehaviour
 {
-    public List<Enemy> enenmis = new List<Enemy>();
+    public List<Enemy> enemies = new List<Enemy>();
     [SerializeField] TMP_InputField inputField;
-    [SerializeField] private Button healthButton;
-    [SerializeField] private Button lvlButton;
-    [SerializeField] private Button enemyButton;
-    [SerializeField] private Button reset;
-    [SerializeField] private Button toBoss;
 
     private void Start()
     {
+        //enemies.Add(GameObject.FindAnyObjectByType<Enemy>());
+        
+    }
+    private void Update()
+    {
 
     }
+
+
+
 
     public void HPFilter()
     {
         float maxHP;
         if (float.TryParse(inputField.text, out maxHP))
         {
-            foreach (Enemy enemy in enenmis)
+            foreach (Enemy enemy in enemies)
             {
                 if(enemy.health > maxHP)
                 {
@@ -43,7 +46,7 @@ public class EnemyChanger : MonoBehaviour
         int maxLVL;
         if (int.TryParse(inputField.text,out maxLVL))
         {
-            foreach(Enemy enemy in enenmis)
+            foreach(Enemy enemy in enemies)
             {
                 if(enemy.lvl >= maxLVL)
                 {
@@ -59,7 +62,7 @@ public class EnemyChanger : MonoBehaviour
 
     public void ResetFilter()
     {
-        foreach(Enemy enemy in enenmis)
+        foreach(Enemy enemy in enemies)
         {
             enemy.gameObject.SetActive(true);
         }
@@ -68,12 +71,25 @@ public class EnemyChanger : MonoBehaviour
     public void ToBoss()
     {
         string nameFind = inputField.text;
-        foreach(Enemy enemy in enenmis)
+        foreach(Enemy enemy in enemies)
         {
-            if(enemy.name == nameFind)
+            if(enemy.enemyName == nameFind)
             {
                 enemy.ToBossKFC();
             }
         }
     }
+
+    public void FindEnemy()
+    {
+        string objFind = inputField.text;
+        foreach (Enemy enemy in enemies)
+        {
+            if (enemy.enemyName == objFind)
+            {
+                enemy.SetName(objFind);
+            }
+        }
+    }
+
 }
